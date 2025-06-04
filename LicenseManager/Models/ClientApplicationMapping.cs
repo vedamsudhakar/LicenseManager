@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace LicenseManager.Models;
+﻿namespace LicenseManager.Models;
 
 public partial class ClientApplicationMapping
 {
