@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LicenseManager.Models;
 
-namespace LicenseManager.Views
+namespace LicenseManager.Controllers
 {
     public class ClientsController : Controller
     {
