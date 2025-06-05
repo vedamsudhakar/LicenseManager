@@ -154,5 +154,51 @@ namespace LicenseManager.Controllers
             return JsonSerializer.Deserialize<List<LicenseFeatureItemData>>(json) ?? new List<LicenseFeatureItemData>();
 
         }
+
+        // DELETE: License/Delete/5
+        public async Task<IActionResult> Delete(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var clientApplicationMapping = _context.ClientApplicationMappings
+                .Include(c => c.FkApplication)
+                .Include(c => c.FkClient)
+                .FirstOrDefault(cam => cam.Id == id);
+
+            ClientApplicationLicenseViewModel clientApplicationLicenseViewModel = new ClientApplicationLicenseViewModel()
+            {
+                ClientApplicationMapping = clientApplicationMapping
+            };
+
+            return View(clientApplicationLicenseViewModel);
+        }
+
+        // POST: License/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        {
+            var clientApplicationMapping = await _context.ClientApplicationMappings.FindAsync(id);
+
+            if (clientApplicationMapping != null)
+            {
+                var licensedFeatures = await _context.ClientApplicationLicensedFeatures
+                    .FirstOrDefaultAsync(lf => lf.FkClientApplicationMappingId == clientApplicationMapping.Id);
+
+                if (licensedFeatures != null)
+                {
+                    _context.ClientApplicationLicensedFeatures.Remove(licensedFeatures);
+                }
+
+                _context.ClientApplicationMappings.Remove(clientApplicationMapping);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
