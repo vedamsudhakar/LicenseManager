@@ -62,56 +62,59 @@
             </div>
 
 
+            @{
+                var index = 0;
+            }
+
             <h3>Assign Features</h3>
             <div style="max-height:400px; overflow-y:auto; border:1px solid #ccc; padding:10px; width: 100%;">
-                @if (Model.LicensedFeatures.Count > 0)
-                {
-                    <table class="table table-bordered table-striped table-sm" style="width: 100%;">
-                        <thead class="thead-light">
 
-                            <tr>
-                                <th style="width: 20%;">@Html.DisplayNameFor(model => model.LicensedFeatures[0].GroupName)</th>
-                                <th style="width: 20%;">@Html.DisplayNameFor(model => model.LicensedFeatures[0].Name)</th>
-                                <th style="width: 20%;">@Html.DisplayNameFor(model => model.LicensedFeatures[0].TotalUsageCount)</th>
-                                <th style="width: 20%;">@Html.DisplayNameFor(model => model.LicensedFeatures[0].Attribute)</th>
-                                <th style="width: 20%;">@Html.DisplayNameFor(model => model.LicensedFeatures[0].Attribute2)</th>
-                            </tr>
-
-                        </thead>
-                        <tbody>
-                            @for (int i = 0; i < Model.LicensedFeatures.Count; i++)
+                <table class="table table-bordered table-striped table-sm" style="width: 100%;">
+                    <thead class="thead-light">
+                        <tr>
+                            <th style="width: 20%;">Group Name</th>
+                            <th style="width: 20%;">Name</th>
+                            <th style="width: 20%;">Total UsageCount</th>
+                            <th style="width: 20%;">Attribute</th>
+                            <th style="width: 20%;">Attribute2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var group in (List<LicenseManager.Models.FeatureGroup>)ViewBag.FeatureGroups)
+                        {
+                            foreach (var feature in group.Features)
                             {
                                 <tr>
                                     <td>
-                                        @Model.LicensedFeatures[i].GroupName
-                                        <input type="hidden" name="LicensedFeatures[@i].GroupName" value="@Model.LicensedFeatures[i].GroupName" />
+                                        @group.Name
+                                        <input type="hidden" name="LicensedFeatures[@index].GroupName" value="@group.Name" />
                                     </td>
                                     <td>
-                                        @Model.LicensedFeatures[i].Name
-                                        <input type="hidden" name="LicensedFeatures[@i].Name" value="@Model.LicensedFeatures[i].Name" />
+                                        @feature.Name
+                                        <input type="hidden" name="LicensedFeatures[@index].Name" value="@feature.Name" />
                                     </td>
                                     <td>
-                                        <select class="form-control form-control-sm" name="LicensedFeatures[@i].TotalUsageCount" style="max-width: 80px;">
-                                            <option value="">--</option>
+                                        <select class="form-control form-control-sm" name="LicensedFeatures[@index].TotalUsageCount" style="max-width: 80px;">
+                                            <option value="-1">--</option>
                                             @for (int j = 1; j <= 100; j++)
                                             {
-                                                <option value="@j" selected="@(Model.LicensedFeatures[i].TotalUsageCount == j ? "selected" : null)">@j</option>
+                                                var selected = Model.LicensedFeatures.Count > index && Model.LicensedFeatures[index].TotalUsageCount == j ? "selected" : null;
+                                                <option value="@j" selected="@selected">@j</option>
                                             }
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" name="LicensedFeatures[@i].Attribute" value="@Model.LicensedFeatures[i].Attribute" class="form-control form-control-sm" />
+                                        <input type="text" name="LicensedFeatures[@index].Attribute" value="@(Model.LicensedFeatures.Count > index ? Model.LicensedFeatures[index].Attribute : "")" class="form-control form-control-sm" />
                                     </td>
                                     <td>
-                                        <input type="text" name="LicensedFeatures[@i].Attribute2" value="@Model.LicensedFeatures[i].Attribute2" class="form-control form-control-sm" />
+                                        <input type="text" name="LicensedFeatures[@index].Attribute2" value="@(Model.LicensedFeatures.Count > index ? Model.LicensedFeatures[index].Attribute2 : "")" class="form-control form-control-sm" />
                                     </td>
                                 </tr>
+                                index++;
                             }
-
-                        </tbody>
-
-                    </table>
-                }
+                        }
+                    </tbody>
+                </table>
             </div>
 
 

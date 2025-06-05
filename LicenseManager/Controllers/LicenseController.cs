@@ -43,10 +43,13 @@ namespace LicenseManager.Controllers
             ViewBag.Applications = new SelectList(_context.Applications, "Id", "Name");
             ViewBag.LicenseId = GenerateUniqueLicenseId();
 
-            var viewModel = new ClientApplicationLicenseViewModel
-            {
-                LicensedFeatures = CreateDefaultFeatureConfiguration()
-            };
+            var featureGroups = _context.FeatureGroups
+                .Include(fg => fg.Features)
+                .OrderBy(x=>x.Name).ThenBy(y=>y.Name).ToList();
+
+            ViewBag.FeatureGroups = featureGroups;
+
+            var viewModel = new ClientApplicationLicenseViewModel();
 
             return View(viewModel);
         }
@@ -62,9 +65,6 @@ namespace LicenseManager.Controllers
 
                 // Get the last inserted ID
                 var insertedId = viewModel.ClientApplicationMapping.Id;
-
-                if (viewModel.LicensedFeatures.Count == 0)
-                    viewModel.LicensedFeatures = CreateDefaultFeatureConfiguration();
 
                 var mapping = new ClientApplicationLicensedFeature
                 {
