@@ -50,7 +50,7 @@ public partial class LicenseManagerContext : DbContext
 
         modelBuilder.Entity<ClientApplicationLicensedFeature>(entity =>
         {
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
             entity.Property(e => e.Features).IsUnicode(false);
             entity.Property(e => e.FkClientApplicationMappingId).HasColumnName("FK_ClientApplicationMappingId");
 

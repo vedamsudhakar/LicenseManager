@@ -1,0 +1,373 @@
+[
+  {
+    "GroupName": "Counters",
+    "Name": "PageProcess",
+    "TotalUsageCount": -1,
+    "Attribute": "0",
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Stations",
+    "Name": "AutoStations",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Stations",
+    "Name": "ControlStations",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Stations",
+    "Name": "CustomStations",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Stations",
+    "Name": "DashboardStation",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Stations",
+    "Name": "DevelopStations",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Stations",
+    "Name": "ExportStations",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Stations",
+    "Name": "InputStations",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Stations",
+    "Name": "ScanStations",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Manual Stations",
+    "Name": "ManualStations",
+    "TotalUsageCount": 50,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Recognition Services",
+    "Name": "FuzzyServer",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Recognition Services",
+    "Name": "efCheckReaderService",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Recognition Services",
+    "Name": "efFreedomService",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Recognition Services",
+    "Name": "efIntegraService",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Recognition Services",
+    "Name": "efSmartService",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Export Services",
+    "Name": "ExportDestinationOracleContentDB",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Export Services",
+    "Name": "ExportDestinationSAP",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Engines Field",
+    "Name": "OCR_A2IA",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Engines Field",
+    "Name": "OCR_ABBYY",
+    "TotalUsageCount": 10,
+    "Attribute": "None",
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Engines Field",
+    "Name": "OCR_CHARACTELL",
+    "TotalUsageCount": 10,
+    "Attribute": "25 CPS",
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Engines Field",
+    "Name": "OCR_EXPERVISION",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Engines Field",
+    "Name": "OCR_INLITE",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Engines Field",
+    "Name": "OCR_IRIS",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Engines Field",
+    "Name": "OCR_KADMOS",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Engines Field",
+    "Name": "OCR_MEDIADRIVE",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Engines Field",
+    "Name": "OCR_OCE",
+    "TotalUsageCount": 10,
+    "Attribute": "25 CPS",
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Engines Field",
+    "Name": "OCR_OMNIPAGE",
+    "TotalUsageCount": 10,
+    "Attribute": "None",
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Engines Field",
+    "Name": "OCR_PENPOWER",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Engines Field",
+    "Name": "OCR_QSBARCODE",
+    "TotalUsageCount": 10,
+    "Attribute": "None",
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Engines Field",
+    "Name": "OCR_RICOH(HAND)",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Engines Field",
+    "Name": "OCR_RICOH(MACHINE)",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Page Recognition Engines",
+    "Name": "IP_OCE",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Page Recognition Engines",
+    "Name": "OP_ABBYY",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Page Recognition Engines",
+    "Name": "OP_ABBYY_CJK",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Page Recognition Engines",
+    "Name": "OP_ABBYY_HEB",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Page Recognition Engines",
+    "Name": "OP_ABBYY_JAP",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Page Recognition Engines",
+    "Name": "OP_EXPERVISION",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Page Recognition Engines",
+    "Name": "OP_IRIS",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Page Recognition Engines",
+    "Name": "OP_MEDIADRIVE",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Page Recognition Engines",
+    "Name": "OP_OCE",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Page Recognition Engines",
+    "Name": "OP_PENPOWER",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Page Recognition Engines",
+    "Name": "OP_RICOH",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Page Recognition Engines",
+    "Name": "OP_SCANSOFT",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "Page Recognition Engines",
+    "Name": "OP_SCANSOFT_ICR",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "OEM",
+    "Name": "DBE_EXORBYTE",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "OEM",
+    "Name": "PixTools_1D_Barcode",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "OEM",
+    "Name": "PixTools_DataMatrix_Barcode",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "OEM",
+    "Name": "PixTools_NET",
+    "TotalUsageCount": 30,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "OEM",
+    "Name": "PixTools_PDF417_Barcode",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "eInvoice",
+    "Name": "eInvoicePortalPDF",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "eInvoice",
+    "Name": "eInvoicePortalXML",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "[Calculated]",
+    "Name": "SuperviseStations",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  },
+  {
+    "GroupName": "(Freedom Service)",
+    "Name": "OP_JUSTICR",
+    "TotalUsageCount": 10,
+    "Attribute": null,
+    "Attribute2": null
+  }
+]

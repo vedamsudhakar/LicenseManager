@@ -1,0 +1,79 @@
+﻿@model LicenseManager.ViewModels.ClientApplicationLicenseViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Client Application License</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           @*  <div class="form-group">
+                <label asp-for="LicenseId" class="control-label"></label>
+                <input asp-for="LicenseId" class="form-control" value="@ViewBag.LicenseId" disabled />
+                <span asp-validation-for="LicenseId" class="text-danger"></span>
+            </div>  *@
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="ClientApplicationMapping.FkClientId" class="control-label">Customer</label>
+                    @Html.DropDownListFor(model => model.ClientApplicationMapping.FkClientId, (SelectList)ViewBag.Clients, "Select Client", new { @class = "form-control" })
+                    <span asp-validation-for="ClientApplicationMapping.FkClientId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label asp-for="ClientApplicationMapping.FkApplicationId" class="control-label">Application</label>
+                    @Html.DropDownListFor(model => model.ClientApplicationMapping.FkApplicationId, (SelectList)ViewBag.Applications, "Select Application", new { @class = "form-control" })
+                    <span asp-validation-for="ClientApplicationMapping.FkApplicationId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="ClientApplicationMapping.StartDate" class="control-label"></label>
+                    <input asp-for="ClientApplicationMapping.StartDate" class="form-control" />
+                    <span asp-validation-for="ClientApplicationMapping.StartDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label asp-for="ClientApplicationMapping.EndDate" class="control-label"></label>
+                    <input asp-for="ClientApplicationMapping.EndDate" class="form-control" />
+                    <span asp-validation-for="ClientApplicationMapping.EndDate" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="ClientApplicationMapping.ActivationsCount" class="control-label"></label>
+                    <input asp-for="ClientApplicationMapping.ActivationsCount" class="form-control" />
+                    <span asp-validation-for="ClientApplicationMapping.ActivationsCount" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-6">
+                    @* <div class="form-group">
+                        <label asp-for="ClientApplicationMapping.LicenseId" class="control-label"></label>
+                        <input asp-for="ClientApplicationMapping.LicenseId" class="form-control" value="@ViewBag.LicenseId" />
+                        <span asp-validation-for="ClientApplicationMapping.LicenseId" class="text-danger"></span>
+                    </div> *@
+                    <input asp-for="ClientApplicationMapping.LicenseId" type="hidden" value="@ViewBag.LicenseId" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,4 +1,6 @@
-﻿namespace LicenseManager.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace LicenseManager.Models;
 
 public partial class ClientApplicationMapping
 {
@@ -18,7 +20,9 @@ public partial class ClientApplicationMapping
 
     public virtual ICollection<ClientApplicationLicensedFeature> ClientApplicationLicensedFeatures { get; set; } = new List<ClientApplicationLicensedFeature>();
 
-    public virtual Application FkApplication { get; set; } = null!;
+    [NotMapped]
+    public virtual Application? FkApplication { get; set; }
 
-    public virtual Client FkClient { get; set; } = null!;
+    [NotMapped]
+    public virtual Client? FkClient { get; set; }
 }
