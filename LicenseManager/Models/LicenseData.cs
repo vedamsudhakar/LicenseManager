@@ -1,10 +1,12 @@
-﻿namespace LicenseManager.Models
+﻿namespace TiS.License.Data.License
 {
     using System;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
+    using TiS.License.Data.Feature;
 
-    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/TiS.License.Data.License")]
+    [DataContract(Name = "LicenseData", Namespace = "http://schemas.datacontract.org/2004/07/TiS.License.Data.License")]
+    [KnownType(typeof(TiS.License.Data.Feature.LicenseFeatureItemData))]
     public class LicenseData
     {
         [DataMember(Name = "m_ActivationExpirationDate")]
