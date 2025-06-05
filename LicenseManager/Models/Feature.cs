@@ -11,7 +11,7 @@ public partial class Feature
     [Display(Name = "Feature Group Id")]
     public Guid FkFeatureGroupId { get; set; }
 
-    [Display(Name = "Feature Group")]
+    [Display(Name = "Name")]
     public string Name { get; set; } = null!;
 
     [Display(Name ="Feature Group")]
