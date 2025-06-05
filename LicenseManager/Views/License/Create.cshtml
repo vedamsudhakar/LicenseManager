@@ -31,26 +31,26 @@
             </div>
 
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label asp-for="ClientApplicationMapping.StartDate" class="control-label"></label>
-                    <input asp-for="ClientApplicationMapping.StartDate" class="form-control" />
+                    <input asp-for="ClientApplicationMapping.StartDate" class="form-control" type="date" />
                     <span asp-validation-for="ClientApplicationMapping.StartDate" class="text-danger"></span>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label asp-for="ClientApplicationMapping.EndDate" class="control-label"></label>
-                    <input asp-for="ClientApplicationMapping.EndDate" class="form-control" />
+                    <input asp-for="ClientApplicationMapping.EndDate" class="form-control" type="date" />
                     <span asp-validation-for="ClientApplicationMapping.EndDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label asp-for="ClientApplicationMapping.ActivationsCount" class="control-label"></label>
+                    <input asp-for="ClientApplicationMapping.ActivationsCount" class="form-control" type="number" min="1" />
+                    <span asp-validation-for="ClientApplicationMapping.ActivationsCount" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row">
-                <div class="form-group col-md-6">
-                    <label asp-for="ClientApplicationMapping.ActivationsCount" class="control-label"></label>
-                    <input asp-for="ClientApplicationMapping.ActivationsCount" class="form-control" />
-                    <span asp-validation-for="ClientApplicationMapping.ActivationsCount" class="text-danger"></span>
-                </div>
-
                 <div class="form-group col-md-6">
                     @* <div class="form-group">
                         <label asp-for="ClientApplicationMapping.LicenseId" class="control-label"></label>
