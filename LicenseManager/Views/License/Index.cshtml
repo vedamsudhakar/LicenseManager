@@ -14,14 +14,24 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.LicenseId)               
+                @Html.DisplayNameFor(model => model.LicenseId)
             </th>
             <th>
-                @Html.Label("FkClient.Name", "Client")
+                @Html.DisplayNameFor(model => model.FkClient)
             </th>
             <th>
-                @Html.Label("model.FkApplication.Name", "Application")
+                @Html.DisplayNameFor(model => model.FkApplication)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivationsCount)
+            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -38,6 +48,15 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FkApplication.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActivationsCount)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
