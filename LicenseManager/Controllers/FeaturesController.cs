@@ -43,7 +43,7 @@ namespace LicenseManager.Controllers
         // GET: Features/Create
         public IActionResult Create()
         {
-            ViewData["FkFeatureGroupId"] = new SelectList(_context.FeatureGroups, "Id", "Id");
+            ViewData["FkFeatureGroupId"] = new SelectList(_context.FeatureGroups, "Id", "Name");
             return View();
         }
 
@@ -61,7 +61,7 @@ namespace LicenseManager.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FkFeatureGroupId"] = new SelectList(_context.FeatureGroups, "Id", "Id", feature.FkFeatureGroupId);
+            ViewData["FkFeatureGroupId"] = new SelectList(_context.FeatureGroups, "Id", "Name", feature.FkFeatureGroupId);
             return View(feature);
         }
 
@@ -78,7 +78,7 @@ namespace LicenseManager.Controllers
             {
                 return NotFound();
             }
-            ViewData["FkFeatureGroupId"] = new SelectList(_context.FeatureGroups, "Id", "Id", feature.FkFeatureGroupId);
+            ViewData["FkFeatureGroupId"] = new SelectList(_context.FeatureGroups, "Id", "Name", feature.FkFeatureGroupId);
             return View(feature);
         }
 
@@ -114,7 +114,7 @@ namespace LicenseManager.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FkFeatureGroupId"] = new SelectList(_context.FeatureGroups, "Id", "Id", feature.FkFeatureGroupId);
+            ViewData["FkFeatureGroupId"] = new SelectList(_context.FeatureGroups, "Id", "Name", feature.FkFeatureGroupId);
             return View(feature);
         }
 
