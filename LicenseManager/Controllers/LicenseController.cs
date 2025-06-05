@@ -3,9 +3,14 @@ using LicenseManager.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
+using System.Xml;
 using System.Xml.Serialization;
+using TiS.License.Data.Feature;
+using TiS.License.Data.License;
 
 namespace LicenseManager.Controllers
 {
@@ -102,17 +107,35 @@ namespace LicenseManager.Controllers
             };
 
             // 1. Serialize to XML
-            var xmlSerializer = new XmlSerializer(typeof(LicenseData));
-            string xmlString;
+            //var xmlSerializer = new XmlSerializer(typeof(LicenseData));
+            //string xmlString;
 
-            using (var stringWriter = new StringWriter())
+            //using (var stringWriter = new StringWriter())
+            //{
+            //    xmlSerializer.Serialize(stringWriter, licenseData);
+            //    xmlString = stringWriter.ToString();
+            //}
+
+            var namespaces = new XmlSerializerNamespaces();
+            namespaces.Add("i", "http://www.w3.org/2001/XMLSchema-instance");
+            namespaces.Add("z", "http://schemas.microsoft.com/2003/10/Serialization/");
+            namespaces.Add("",  "http://schemas.datacontract.org/2004/07/TiS.License.Data.License");
+            namespaces.Add("a", "http://schemas.datacontract.org/2004/07/TiS.License.Data.Feature");
+
+
+            var serializer = new DataContractSerializer(typeof(LicenseData), new DataContractSerializerSettings
             {
-                xmlSerializer.Serialize(stringWriter, licenseData);
-                xmlString = stringWriter.ToString();
+                PreserveObjectReferences = true
+            });
+
+            var sb = new StringBuilder();
+            using (var writer = XmlWriter.Create(sb, new XmlWriterSettings { Indent = true }))
+            {
+                serializer.WriteObject(writer, licenseData);
             }
 
             // 2. Convert XML string to Base64
-            var xmlBytes = Encoding.UTF8.GetBytes(xmlString);
+            var xmlBytes = Encoding.UTF8.GetBytes(sb.ToString());
             var base64String = Convert.ToBase64String(xmlBytes);
 
             // 3. Convert Base64 string back to bytes for download

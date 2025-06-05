@@ -1,4 +1,5 @@
 ﻿using LicenseManager.Models;
+using TiS.License.Data.Feature;
 
 namespace LicenseManager.ViewModels
 {
