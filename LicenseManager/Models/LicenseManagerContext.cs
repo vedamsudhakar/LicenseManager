@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LicenseManager.Authentication;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace LicenseManager.Models;
 
-public partial class LicenseManagerContext : DbContext
+public partial class LicenseManagerContext : IdentityDbContext<ApplicationUser>
 {
     public LicenseManagerContext()
     {
@@ -32,6 +34,8 @@ public partial class LicenseManagerContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+         base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<Application>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Applicat__3214EC07BAD0BE80");
