@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<LicenseManager.Authentication.ApplicationUser> SignInManager
+@inject UserManager<LicenseManager.Authentication.ApplicationUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -20,31 +24,53 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item me-3">
-                            <a class="nav-link text-dark @(ViewContext.RouteData.Values["controller"]?.ToString() == "License" ? "fw-bold active" : "")"
-                               asp-area="" asp-controller="License" asp-action="Index">
-                                <i class="bi bi-file-earmark-text"></i> Licenses
-                            </a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link text-dark @(ViewContext.RouteData.Values["controller"]?.ToString() == "Applications" ? "fw-bold active" : "")"
-                               asp-area="" asp-controller="Applications" asp-action="Index">
-                                <i class="bi bi-box"></i> Applications
-                            </a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link text-dark @(ViewContext.RouteData.Values["controller"]?.ToString() == "Clients" ? "fw-bold active" : "")"
-                               asp-area="" asp-controller="Clients" asp-action="Index">
-                                <i class="bi bi-people"></i> Clients
-                            </a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link text-dark @(ViewContext.RouteData.Values["controller"]?.ToString() == "Features" ? "fw-bold active" : "")"
-                               asp-area="" asp-controller="Features" asp-action="Index">
-                                <i class="bi bi-sliders"></i> Features
-                            </a>
-                        </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-dark @(ViewContext.RouteData.Values["controller"]?.ToString() == "License" ? "fw-bold active" : "")"
+                                asp-area="" asp-controller="License" asp-action="Index">
+                                    <i class="bi bi-file-earmark-text"></i> Licenses
+                                </a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-dark @(ViewContext.RouteData.Values["controller"]?.ToString() == "Applications" ? "fw-bold active" : "")"
+                                asp-area="" asp-controller="Applications" asp-action="Index">
+                                    <i class="bi bi-box"></i> Applications
+                                </a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-dark @(ViewContext.RouteData.Values["controller"]?.ToString() == "Clients" ? "fw-bold active" : "")"
+                                asp-area="" asp-controller="Clients" asp-action="Index">
+                                    <i class="bi bi-people"></i> Clients
+                                </a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-dark @(ViewContext.RouteData.Values["controller"]?.ToString() == "Features" ? "fw-bold active" : "")"
+                                asp-area="" asp-controller="Features" asp-action="Index">
+                                    <i class="bi bi-sliders"></i> Features
+                                </a>
+                            </li>
+                        }
                     </ul>
+                    <ul class="navbar-nav">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <span class="nav-link">Hello, @User.Identity.Name</span>
+                            </li>
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-link nav-link" style="cursor: pointer;">Logout</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        }
+                    </ul>                    
                 </div>
             </div>
         </nav>
