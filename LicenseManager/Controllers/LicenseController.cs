@@ -1,13 +1,11 @@
 ﻿using LicenseManager.Models;
 using LicenseManager.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.IO;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
-using System.Xml;
 using System.Xml.Serialization;
 using TiS.License.Data.Feature;
 using TiS.License.Data.License;
@@ -23,8 +21,8 @@ namespace LicenseManager.Controllers
             _context = context;
         }
 
-
         // GET: ClientApplication licenses
+        [Authorize(Roles = "Admin, User")]        
         public async Task<IActionResult> Index()
         {
             // return View(await _context.ClientApplicationMappings.ToListAsync());
@@ -36,7 +34,9 @@ namespace LicenseManager.Controllers
             return View(mappings);
         }
 
+
         // GET: License/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewBag.Clients = new SelectList(_context.Clients, "Id", "Name");
@@ -54,6 +54,7 @@ namespace LicenseManager.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ClientApplicationLicenseViewModel viewModel)
@@ -86,6 +87,7 @@ namespace LicenseManager.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Admin, User")]
         // GET: License/Create
         public IActionResult Download(Guid? id)
         {
@@ -187,6 +189,7 @@ namespace LicenseManager.Controllers
         }
 
         // DELETE: License/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -210,6 +213,7 @@ namespace LicenseManager.Controllers
         // POST: License/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var clientApplicationMapping = await _context.ClientApplicationMappings.FindAsync(id);

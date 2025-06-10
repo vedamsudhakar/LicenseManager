@@ -2,7 +2,6 @@
 using LicenseManager.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Versioning;
 
 namespace LicenseManager.Controllers
 {
@@ -18,14 +17,15 @@ namespace LicenseManager.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string? returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
         {
             if (!ModelState.IsValid)
                 return View(model);
@@ -40,7 +40,14 @@ namespace LicenseManager.Controllers
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, lockoutOnFailure: false);
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home"); 
+                }
             }
 
             if (result.IsLockedOut)
