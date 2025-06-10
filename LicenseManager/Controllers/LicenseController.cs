@@ -237,5 +237,41 @@ namespace LicenseManager.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // GET: License/Details/5
+        public async Task<IActionResult> Details(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var clientApplicationMapping = await _context.ClientApplicationMappings
+                .Include(f => f.FkApplication)
+                .Include(f => f.FkClient)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (clientApplicationMapping == null)
+            {
+                return NotFound();
+            }
+
+            var licensedFeatures = await _context.ClientApplicationLicensedFeatures
+                .FirstOrDefaultAsync(lf => lf.FkClientApplicationMappingId == clientApplicationMapping.Id);
+
+            List<LicenseFeatureItemData> features = [];
+            if (licensedFeatures != null && !string.IsNullOrEmpty(licensedFeatures.Features))
+            {
+                features = JsonSerializer.Deserialize<List<LicenseFeatureItemData>>(licensedFeatures.Features) ?? [];
+            }
+
+            var viewModel = new ClientApplicationLicenseViewModel
+            {
+                ClientApplicationMapping = clientApplicationMapping,
+                LicensedFeatures = features
+            };
+
+            return View(viewModel);
+        }
+
     }
 }

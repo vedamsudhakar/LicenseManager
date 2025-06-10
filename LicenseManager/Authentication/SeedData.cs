@@ -43,7 +43,7 @@ namespace LicenseManager.Authentication
             {
                 adminUser = new ApplicationUser
                 {
-                    UserName = adminEmail,
+                    UserName = adminUserName,
                     Email = adminEmail
                 };
 

@@ -1,0 +1,69 @@
+@model LicenseManager.ViewModels.ClientApplicationLicenseViewModel
+
+@{
+    ViewData["Title"] = "License Details";
+}
+
+<h2>License Details</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label><b>Customer:</b></label>
+            <span>@Model.ClientApplicationMapping.FkClient?.Name</span>
+        </div>
+        <div class="form-group">
+            <label><b>Application:</b></label>
+            <span>@Model.ClientApplicationMapping.FkApplication?.Name</span>
+        </div>
+        <div class="form-group">
+            <label><b>Start Date:</b></label>
+            <span>@Model.ClientApplicationMapping.StartDate.ToShortDateString()</span>
+        </div>
+        <div class="form-group">
+            <label><b>End Date:</b></label>
+            <span>@Model.ClientApplicationMapping.EndDate.ToShortDateString()</span>
+        </div>
+        <div class="form-group">
+            <label><b>Activations Count:</b></label>
+            <span>@Model.ClientApplicationMapping.ActivationsCount</span>
+        </div>
+        <div class="form-group">
+            <label><b>License ID:</b></label>
+            <span>@Model.ClientApplicationMapping.LicenseId</span>
+        </div>
+        <br />
+
+        <h3>Assigned Features</h3>
+        <div style="max-height:400px; overflow-y:auto; border:1px solid #ccc; padding:10px; width: 100%;">
+            <table class="table table-bordered table-striped table-sm" style="width: 100%;">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Group Name</th>
+                        <th>Name</th>
+                        <th>Total UsageCount</th>
+                        <th>Attribute</th>
+                        <th>Attribute2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var feature in Model.LicensedFeatures)
+                    {
+                        <tr>
+                            <td>@feature.GroupName</td>
+                            <td>@feature.Name</td>
+                            <td>@feature.TotalUsageCount</td>
+                            <td>@feature.Attribute</td>
+                            <td>@feature.Attribute2</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.ClientApplicationMapping.Id">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</div>
