@@ -24,8 +24,8 @@
         public string GroupName { get; set; }        
 
         [DataMember(Name = "m_TotalUsageCount")]
-        [Display(Name = "Total Usage Count")]
-        public int TotalUsageCount { get; set; }
+        [Display(Name = "Total Usage Allowed")]
+        public int TotalUsageAllowed { get; set; }
     }
 }
 
