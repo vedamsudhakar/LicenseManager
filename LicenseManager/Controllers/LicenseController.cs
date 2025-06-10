@@ -48,6 +48,7 @@ namespace LicenseManager.Controllers
                 .OrderBy(x=>x.Name).ThenBy(y=>y.Name).ToList();
 
             ViewBag.FeatureGroups = featureGroups;
+            ViewBag.DefaultFeatureConfiguration = CreateDefaultFeatureConfiguration();
 
             var viewModel = new ClientApplicationLicenseViewModel();
 
@@ -176,7 +177,7 @@ namespace LicenseManager.Controllers
             return uniqueId;
         }
 
-        private List<LicenseFeatureItemData> CreateDefaultFeatureConfiguration()
+        private Dictionary<string, LicenseFeatureItemData> CreateDefaultFeatureConfiguration()
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "Data", "default-feature-configuration.json");
 
@@ -184,8 +185,9 @@ namespace LicenseManager.Controllers
                 return [];
 
             var json = System.IO.File.ReadAllText(path);
-            return JsonSerializer.Deserialize<List<LicenseFeatureItemData>>(json) ?? new List<LicenseFeatureItemData>();
+            List<LicenseFeatureItemData> featureDataItems = JsonSerializer.Deserialize<List<LicenseFeatureItemData>>(json) ?? new List<LicenseFeatureItemData>();
 
+            return  featureDataItems.ToDictionary(fd => $"{fd.GroupName}_{fd.Name}", fd => fd);
         }
 
         // DELETE: License/Delete/5

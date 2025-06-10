@@ -75,7 +75,7 @@
                         <tr>
                             <th style="width: 20%;">Group Name</th>
                             <th style="width: 20%;">Name</th>
-                            <th style="width: 20%;">Total UsageCount</th>
+                            <th style="width: 20%;">Total Usage Allowed</th>
                             <th style="width: 20%;">Attribute</th>
                             <th style="width: 20%;">Attribute2</th>
                         </tr>
@@ -85,6 +85,8 @@
                         {
                             foreach (var feature in group.Features)
                             {
+                                 var featureKey = $"{group.Name}_{feature.Name}";
+
                                 <tr>
                                     <td>
                                         @group.Name
@@ -95,17 +97,30 @@
                                         <input type="hidden" name="LicensedFeatures[@index].Name" value="@feature.Name" />
                                     </td>
                                     <td>
-                                        <select class="form-control form-control-sm" name="LicensedFeatures[@index].TotalUsageCount" style="max-width: 80px;">
-                                            <option value="-1">--</option>
+                                        @{
+                                           var totalUsageAllowed = ViewBag.DefaultFeatureConfiguration.ContainsKey(featureKey) 
+                                                               ? ViewBag.DefaultFeatureConfiguration[featureKey].TotalUsageAllowed
+                                                               : -1; 
+                                         }                                         
+
+                                        <select class="form-control form-control-sm" name="LicensedFeatures[@index].TotalUsageAllowed" style="max-width: 80px;">
+                                            <option value="@totalUsageAllowed">@totalUsageAllowed</option>
                                             @for (int j = 1; j <= 100; j++)
                                             {
-                                                var selected = Model.LicensedFeatures.Count > index && Model.LicensedFeatures[index].TotalUsageCount == j ? "selected" : null;
+                                                var selected = Model.LicensedFeatures.Count > index && Model.LicensedFeatures[index].TotalUsageAllowed == j ? "selected" : null;
                                                 <option value="@j" selected="@selected">@j</option>
                                             }
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" name="LicensedFeatures[@index].Attribute" value="@(Model.LicensedFeatures.Count > index ? Model.LicensedFeatures[index].Attribute : "")" class="form-control form-control-sm" />
+                                        
+                                        @{                                          
+                                            var attributeValue = ViewBag.DefaultFeatureConfiguration.ContainsKey(featureKey) 
+                                                               ? ViewBag.DefaultFeatureConfiguration[featureKey].Attribute
+                                                               : ""; 
+                                        }
+
+                                        <input type="text" name="LicensedFeatures[@index].Attribute" value="@attributeValue" class="form-control form-control-sm" />
                                     </td>
                                     <td>
                                         <input type="text" name="LicensedFeatures[@index].Attribute2" value="@(Model.LicensedFeatures.Count > index ? Model.LicensedFeatures[index].Attribute2 : "")" class="form-control form-control-sm" />
