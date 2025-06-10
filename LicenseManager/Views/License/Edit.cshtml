@@ -1,0 +1,103 @@
+@model LicenseManager.ViewModels.ClientApplicationLicenseViewModel
+
+@{
+    ViewData["Title"] = "Edit License";
+}
+
+<h2>Edit License</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="ClientApplicationMapping.Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="ClientApplicationMapping.FkClientId" class="control-label" style="font-weight : bold">Customer</label>
+                    @Html.DropDownListFor(model => model.ClientApplicationMapping.FkClientId, (SelectList)ViewBag.Clients, "Select Client", new { @class = "form-control" })
+                    <span asp-validation-for="ClientApplicationMapping.FkClientId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label asp-for="ClientApplicationMapping.FkApplicationId" class="control-label" style="font-weight : bold">Application</label>
+                    @Html.DropDownListFor(model => model.ClientApplicationMapping.FkApplicationId, (SelectList)ViewBag.Applications, "Select Application", new { @class = "form-control" })
+                    <span asp-validation-for="ClientApplicationMapping.FkApplicationId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="ClientApplicationMapping.StartDate" class="control-label"></label>
+                    <input asp-for="ClientApplicationMapping.StartDate" class="form-control" type="date" />
+                    <span asp-validation-for="ClientApplicationMapping.StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="ClientApplicationMapping.EndDate" class="control-label"></label>
+                    <input asp-for="ClientApplicationMapping.EndDate" class="form-control" type="date" />
+                    <span asp-validation-for="ClientApplicationMapping.EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="ClientApplicationMapping.ActivationsCount" class="control-label"></label>
+                    <input asp-for="ClientApplicationMapping.ActivationsCount" class="form-control" />
+                    <span asp-validation-for="ClientApplicationMapping.ActivationsCount" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ClientApplicationMapping.LicenseId" class="control-label"></label>
+                <input asp-for="ClientApplicationMapping.LicenseId" class="form-control" readonly />
+            </div>
+
+            <br />
+
+            <h3>Assign Features</h3>
+            <div style="max-height:400px; overflow-y:auto; border:1px solid #ccc; padding:10px; width: 100%;">
+                <table class="table table-bordered table-striped table-sm" style="width: 100%;">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Group Name</th>
+                            <th>Name</th>
+                            <th>Total UsageCount</th>
+                            <th>Attribute</th>
+                            <th>Attribute2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (var i = 0; i < Model.LicensedFeatures.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    <input asp-for="LicensedFeatures[@i].GroupName" class="form-control" />
+                                </td>
+                                <td>
+                                    <input asp-for="LicensedFeatures[@i].Name" class="form-control" />
+                                </td>
+                                <td>
+                                    <input asp-for="LicensedFeatures[@i].TotalUsageAllowed" class="form-control" />
+                                </td>
+                                <td>
+                                    <input asp-for="LicensedFeatures[@i].Attribute" class="form-control" />
+                                </td>
+                                <td>
+                                    <input asp-for="LicensedFeatures[@i].Attribute2" class="form-control" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
