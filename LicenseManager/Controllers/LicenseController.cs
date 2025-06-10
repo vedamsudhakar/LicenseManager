@@ -271,5 +271,92 @@ namespace LicenseManager.Controllers
             return View(viewModel);
         }
 
+        // GET: License/Edit/5
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(Guid? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var clientApplicationMapping = await _context.ClientApplicationMappings
+                .Include(f => f.FkApplication)
+                .Include(f => f.FkClient)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (clientApplicationMapping == null)
+                return NotFound();
+
+            var licensedFeatures = await _context.ClientApplicationLicensedFeatures
+                .FirstOrDefaultAsync(lf => lf.FkClientApplicationMappingId == clientApplicationMapping.Id);
+
+            List<LicenseFeatureItemData> features = [];
+            if (licensedFeatures != null && !string.IsNullOrEmpty(licensedFeatures.Features))
+                features = JsonSerializer.Deserialize<List<LicenseFeatureItemData>>(licensedFeatures.Features) ?? [];
+
+            var viewModel = new ClientApplicationLicenseViewModel
+            {
+                ClientApplicationMapping = clientApplicationMapping,
+                LicensedFeatures = features
+            };
+
+            // Load dropdowns if needed
+            ViewBag.Clients = new SelectList(_context.Clients, "Id", "Name");
+            ViewBag.Applications = new SelectList(_context.Applications, "Id", "Name");
+
+            return View(viewModel);
+        }
+
+        // POST: License/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(Guid id, ClientApplicationLicenseViewModel viewModel)
+        {
+            if (id != viewModel.ClientApplicationMapping.Id)
+                return NotFound();
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(viewModel.ClientApplicationMapping);
+
+                    // Update features
+                    var licensedFeature = await _context.ClientApplicationLicensedFeatures
+                        .FirstOrDefaultAsync(lf => lf.FkClientApplicationMappingId == id);
+
+                    if (licensedFeature != null)
+                    {
+                        licensedFeature.Features = JsonSerializer.Serialize(viewModel.LicensedFeatures);
+                        _context.Update(licensedFeature);
+                    }
+                    else
+                    {
+                        // If not found, create new
+                        licensedFeature = new ClientApplicationLicensedFeature
+                        {
+                            FkClientApplicationMappingId = id,
+                            Features = JsonSerializer.Serialize(viewModel.LicensedFeatures)
+                        };
+                        _context.Add(licensedFeature);
+                    }
+
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!_context.ClientApplicationMappings.Any(e => e.Id == id))
+                        return NotFound();
+                    else
+                        throw;
+                }
+                return RedirectToAction(nameof(Index));
+            }
+
+            // Reload dropdowns if needed
+            ViewBag.Clients = new SelectList(_context.Clients, "Id", "Name");
+            ViewBag.Applications = new SelectList(_context.Applications, "Id", "Name");
+            return View(viewModel);
+        }
     }
 }

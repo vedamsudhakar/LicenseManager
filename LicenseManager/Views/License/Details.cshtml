@@ -8,62 +8,81 @@
 <hr />
 <div class="row">
     <div class="col-md-12">
-        <div class="form-group">
-            <label><b>Customer:</b></label>
-            <span>@Model.ClientApplicationMapping.FkClient?.Name</span>
-        </div>
-        <div class="form-group">
-            <label><b>Application:</b></label>
-            <span>@Model.ClientApplicationMapping.FkApplication?.Name</span>
-        </div>
-        <div class="form-group">
-            <label><b>Start Date:</b></label>
-            <span>@Model.ClientApplicationMapping.StartDate.ToShortDateString()</span>
-        </div>
-        <div class="form-group">
-            <label><b>End Date:</b></label>
-            <span>@Model.ClientApplicationMapping.EndDate.ToShortDateString()</span>
-        </div>
-        <div class="form-group">
-            <label><b>Activations Count:</b></label>
-            <span>@Model.ClientApplicationMapping.ActivationsCount</span>
-        </div>
-        <div class="form-group">
-            <label><b>License ID:</b></label>
-            <span>@Model.ClientApplicationMapping.LicenseId</span>
-        </div>
-        <br />
+        <form>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label" style="font-weight : bold">Customer</label>
+                    <input class="form-control" value="@Model.ClientApplicationMapping.FkClient?.Name" readonly />
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label" style="font-weight : bold">Application</label>
+                    <input class="form-control" value="@Model.ClientApplicationMapping.FkApplication?.Name" readonly />
+                </div>
+            </div>
 
-        <h3>Assigned Features</h3>
-        <div style="max-height:400px; overflow-y:auto; border:1px solid #ccc; padding:10px; width: 100%;">
-            <table class="table table-bordered table-striped table-sm" style="width: 100%;">
-                <thead class="thead-light">
-                    <tr>
-                        <th>Group Name</th>
-                        <th>Name</th>
-                        <th>Total UsageCount</th>
-                        <th>Attribute</th>
-                        <th>Attribute2</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var feature in Model.LicensedFeatures)
-                    {
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label">Start Date</label>
+                    <input class="form-control" value="@Model.ClientApplicationMapping.StartDate.ToString("yyyy-MM-dd")" readonly />
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label">End Date</label>
+                    <input class="form-control" value="@Model.ClientApplicationMapping.EndDate.ToString("yyyy-MM-dd")" readonly />
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label">Activations Count</label>
+                    <input class="form-control" value="@Model.ClientApplicationMapping.ActivationsCount" readonly />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">License ID</label>
+                <input class="form-control" value="@Model.ClientApplicationMapping.LicenseId" readonly />
+            </div>
+
+            <br />
+
+            <h3>Assigned Features</h3>
+            <div style="max-height:400px; overflow-y:auto; border:1px solid #ccc; padding:10px; width: 100%;">
+                <table class="table table-bordered table-striped table-sm" style="width: 100%;">
+                    <thead class="thead-light">
                         <tr>
-                            <td>@feature.GroupName</td>
-                            <td>@feature.Name</td>
-                            <td>@feature.TotalUsageCount</td>
-                            <td>@feature.Attribute</td>
-                            <td>@feature.Attribute2</td>
+                            <th>Group Name</th>
+                            <th>Name</th>
+                            <th>Total UsageCount</th>
+                            <th>Attribute</th>
+                            <th>Attribute2</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <br />
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model.ClientApplicationMapping.Id">Edit</a> |
-            <a asp-action="Index">Back to List</a>
-        </div>
+                    </thead>
+                    <tbody>
+                        @for (var i = 0; i < Model.LicensedFeatures.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    <input class="form-control" value="@Model.LicensedFeatures[i].GroupName" readonly />
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.LicensedFeatures[i].Name" readonly />
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.LicensedFeatures[i].TotalUsageCount" readonly />
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.LicensedFeatures[i].Attribute" readonly />
+                                </td>
+                                <td>
+                                    <input class="form-control" value="@Model.LicensedFeatures[i].Attribute2" readonly />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-group">
+                <a asp-action="Edit" asp-route-id="@Model.ClientApplicationMapping.Id">Edit</a> |
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
     </div>
 </div>
