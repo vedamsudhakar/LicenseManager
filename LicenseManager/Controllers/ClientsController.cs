@@ -34,6 +34,19 @@ namespace LicenseManager.Controllers
                 return NotFound();
             }
 
+            //To load client application mappings
+            await _context.Entry(client)
+                          .Collection(c => c.ClientApplicationMappings)
+                          .LoadAsync();
+
+            //To load Application object at each client application mapping
+            foreach(var clientApplicationMapping in client.ClientApplicationMappings)
+            {
+                await _context.Entry(clientApplicationMapping)
+                              .Reference(m => m.FkApplication)
+                              .LoadAsync();
+            }
+
             return View(client);
         }
 
