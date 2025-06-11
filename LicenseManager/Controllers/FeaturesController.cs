@@ -17,7 +17,9 @@ namespace LicenseManager.Controllers
         // GET: Features
         public async Task<IActionResult> Index()
         {
-            var licenseManagerContext = _context.Features.Include(f => f.FkFeatureGroup);
+            var licenseManagerContext = _context.Features.Include(f => f.FkFeatureGroup)
+            .OrderBy(f => f.FkFeatureGroup.Name)
+            .ThenBy(f => f.Name);
             return View(await licenseManagerContext.ToListAsync());
         }
 
