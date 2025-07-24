@@ -116,13 +116,6 @@ namespace LicenseManager.Controllers
             };
 
 
-            //var namespaces = new XmlSerializerNamespaces();
-            //namespaces.Add("i", "http://www.w3.org/2001/XMLSchema-instance");
-            //namespaces.Add("z", "http://schemas.microsoft.com/2003/10/Serialization/");
-            //namespaces.Add("", "http://schemas.datacontract.org/2004/07/TiS.License.Data.License");
-            //namespaces.Add("a", "http://schemas.datacontract.org/2004/07/TiS.License.Data.Feature");
-
-            // 1. Serialize to XML
             var xmlSerializer = new XmlSerializer(typeof(LicenseData));
             string xmlString = string.Empty;
 
@@ -131,30 +124,8 @@ namespace LicenseManager.Controllers
                 xmlSerializer.Serialize(stringWriter, licenseData);
                 xmlString = stringWriter.ToString();
             }
-
-            //var serializer = new DataContractSerializer(typeof(LicenseData), new DataContractSerializerSettings
-            //{
-            //    PreserveObjectReferences = true
-            //});
-
-            //var sb = new StringBuilder();
-            //using (var writer = XmlWriter.Create(sb, new XmlWriterSettings { Indent = true }))
-            //{
-            //    serializer.WriteObject(writer, licenseData);
-            //}
-
             
             var xmlBytes = Encoding.UTF8.GetBytes(xmlString);
-
-            //// 2. Convert XML string to Base64
-            //var base64String = Convert.ToBase64String(xmlBytes);
-
-            //// 3. Convert Base64 string back to bytes for download
-            //var base64Bytes = Encoding.UTF8.GetBytes(base64String);
-
-            var fileName = $"eFlow + {clientApplicationMapping.ActivationsCount} Activations + {clientApplicationMapping.LicenseId} + LIMITED {clientApplicationMapping.EndDate.ToString("yyyy-MM-dd")}.TIS_LIC";
-
-            // 4. Return file with content type and suggested filename
             return File(xmlBytes, "text/plain", "LicenseData.xml");
         }
 
